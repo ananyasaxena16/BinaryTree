@@ -92,6 +92,73 @@ public class BinaryTreeIntro{
             return Math.max(height(node.left),height(node.right)) + 1;
         }
     }
+    
+    
+    //Traversals
+    public static void Preorder(Node node){
+        if(node==null){
+            return;
+        }
+        System.out.println(node.data);
+        Preorder(node.left);
+        Preorder(node.right);
+        
+    }
+    public static void Inorder(Node node){
+        if(node==null){
+            return;
+        }
+        
+        Inorder(node.left);
+        System.out.println(node.data);
+        Inorder(node.right);
+        
+    }
+    public static void Postorder(Node node){
+        if(node==null){
+            return;
+        }
+       
+        Postorder(node.left); 
+        Postorder(node.right);
+        System.out.println(node.data);
+        
+    }
+    //Iterative Traversals
+    public static void IterativeTraversal(Node node){
+        Stack<Pair> st = new Stack<>();
+    
+    st.push(new Pair(node,1));
+    String pre = "" , in = "" , post = "";
+    while(st.size() > 0){
+        Pair top = st.peek();
+        
+        if(top.state == 1){
+            pre += top.node.data+" ";
+
+            if(top.node.left == null){
+                top.state++;
+            }else{
+                st.push(new Pair(top.node.left , 1));
+                top.state++;
+            }
+        }else if(top.state == 2){
+            in += top.node.data +" ";
+            
+            if(top.node.right == null){
+                top.state++;
+            }else{
+                st.push(new Pair(top.node.right , 1));
+                top.state++;
+            }
+        }else if(top.state == 3){
+            post += top.node.data+" ";
+            st.pop();
+        }
+    }
+    System.out.println(pre + "+" in + "+"+ post);
+ }
+        
 
     public static void main(String[] args) {
         Integer inp[] = {10,20,40,null,null,50,80,null,null,null,30,60,null,90,null,null,70,null,null};
@@ -101,6 +168,10 @@ public class BinaryTreeIntro{
         System.out.println(size(root));
         System.out.println(sum(root));
         System.out.println(height(root));
+        Preorder(root);
+        Inorder(root);
+        Postorder(root);
+        IterativeTraversal(root);
 
 
 
