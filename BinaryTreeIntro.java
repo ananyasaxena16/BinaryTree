@@ -64,9 +64,45 @@ public class BinaryTreeIntro{
         display(node.left);
         display(node.right);
     }
+    public static int size(Node node){
+        if(node==null){
+            return 0;
+        }else{
+            return size(node.left) + size(node.right) + 1;
+        }
+    }
+    public static int sum(Node node){
+        if(node==null){
+            return 0;
+        }else{
+            return sum(node.left) + sum(node.right) + node.data;
+        }
+    }
+    public static int max(Node node){
+        if(node==null){
+            return 0;
+        }else{
+            return Math.max(max(node.left), Math.max(max(node.right), node.data));
+        }
+    }
+    public static int height(Node node){
+        if(node==null){
+            return -1;
+        }else{
+            return Math.max(height(node.left),height(node.right)) + 1;
+        }
+    }
+
     public static void main(String[] args) {
         Integer inp[] = {10,20,40,null,null,50,80,null,null,null,30,60,null,90,null,null,70,null,null};
         Node root = construct(inp);
         display(root);
+        System.out.println(max(root));
+        System.out.println(size(root));
+        System.out.println(sum(root));
+        System.out.println(height(root));
+
+
+
     }
 }
